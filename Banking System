@@ -1,0 +1,48 @@
+#include <stdio.h>
+#include <string.h>
+
+#define MAX_USERS 10
+
+typedef struct{
+    char name[50];
+    int age;
+    char gender;
+    char interests[100];
+} User;
+
+User users[MAX_USERS];
+int user_count = 0;
+
+void addUser(char *name, int age, char gender, char *interests){
+    strcpy(users[user_count].name, name);
+    users[user_count].age = age;
+    users[user_count].gender = gender;
+    strcpy(users[user_count].interests, interests);
+    user_count++;
+}
+
+void matchUsers()
+{
+    for (int i = 0; i < user_count; i++)
+    {
+        for (int j = i + 1; j < user_count; j++)
+        {
+            if (strcmp(users[i].interests, users[j].interests) == 0)
+            {
+                printf("Match found:-\n %s and %s have similar interests!\n", users[i].name, users[j].name);
+            }
+        }
+    }
+}
+
+int main()
+{
+    addUser("Elisa",18,'F', "coding");
+    addUser("Aditya", 19, 'M', "travelling");
+    addUser("Bannaji", 19, 'F', "reading");
+    addUser("Karthik", 19, 'M', "coding");
+    addUser("Emma", 21, 'F', "travelling");
+    matchUsers();
+
+    return 0;
+}
